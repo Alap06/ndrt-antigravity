@@ -1,0 +1,225 @@
+{
+    "active_alerts": [
+        {
+            "id": "ALRT-2025-01-06-001",
+            "type": "inondation",
+            "gouvernorat": "Bizerte",
+            "severity": "rouge",
+            "issued_at": "2025-01-06T14:30:00+01:00",
+            "expires_at": "2025-01-07T06:00:00+01:00",
+            "affected_areas": [
+                "Menzel Bourguiba",
+                "El Alia",
+                "Bizerte Nord",
+                "Bizerte Sud",
+                "Tinja"
+            ],
+            "affected_population": 180000,
+            "title": "Alerte Inondation Critique",
+            "description": "Précipitations exceptionnelles atteignant 49mm en 24h. Risque d'inondation très élevé dans les zones basses. Évacuations préventives recommandées.",
+            "recommendations": [
+                "Éviter tout déplacement non essentiel",
+                "Se tenir informé via les canaux officiels",
+                "Préparer un kit d'urgence",
+                "Évacuer les zones à risque si demandé"
+            ],
+            "coordinates": {
+                "lat": 37.2744,
+                "lng": 9.8739
+            }
+        },
+        {
+            "id": "ALRT-2025-01-06-002",
+            "type": "inondation",
+            "gouvernorat": "Kasserine",
+            "severity": "rouge",
+            "issued_at": "2025-01-06T15:45:00+01:00",
+            "expires_at": "2025-01-07T08:00:00+01:00",
+            "affected_areas": [
+                "Feriana",
+                "Haidra",
+                "Foussana",
+                "Sbeitla"
+            ],
+            "affected_population": 95000,
+            "title": "Alerte Inondation Majeure",
+            "description": "Cumul pluviométrique critique de 35mm avec prévisions de 15-20mm supplémentaires. Vigilance maximale requise.",
+            "recommendations": [
+                "Activation du plan ORSEC local",
+                "Évacuation des zones inondables",
+                "Fermeture des routes à risque",
+                "Mobilisation des équipes de secours"
+            ],
+            "coordinates": {
+                "lat": 35.1676,
+                "lng": 8.8304
+            }
+        },
+        {
+            "id": "ALRT-2025-01-06-003",
+            "type": "vent_violent",
+            "gouvernorat": "Jendouba",
+            "severity": "orange",
+            "issued_at": "2025-01-06T12:00:00+01:00",
+            "expires_at": "2025-01-06T23:00:00+01:00",
+            "affected_areas": [
+                "Aïn Draham",
+                "Tabarka",
+                "Fernana",
+                "Ghardimaou"
+            ],
+            "affected_population": 75000,
+            "title": "Alerte Vents Violents",
+            "description": "Rafales pouvant atteindre 48 km/h avec pluies modérées. Risque de chutes d'arbres et de dégâts matériels.",
+            "recommendations": [
+                "Sécuriser les objets extérieurs",
+                "Éviter les zones boisées",
+                "Limiter les déplacements",
+                "Vérifier l'état des toitures"
+            ],
+            "coordinates": {
+                "lat": 36.5011,
+                "lng": 8.7803
+            }
+        },
+        {
+            "id": "ALRT-2025-01-06-004",
+            "type": "pluie_forte",
+            "gouvernorat": "Zaghouan",
+            "severity": "orange",
+            "issued_at": "2025-01-06T13:15:00+01:00",
+            "expires_at": "2025-01-07T02:00:00+01:00",
+            "affected_areas": [
+                "Zaghouan",
+                "Djebel Oust",
+                "El Fahs",
+                "Bir Mcherga"
+            ],
+            "affected_population": 85000,
+            "title": "Alerte Pluies Intenses",
+            "description": "Pluies intenses avec cumul de 32mm. Risque d'inondation localisée et de coulées de boue.",
+            "recommendations": [
+                "Surveiller le niveau des oueds",
+                "Éviter les traversées de cours d'eau",
+                "Se tenir prêt à évacuer",
+                "Signaler tout incident"
+            ],
+            "coordinates": {
+                "lat": 36.4028,
+                "lng": 10.1428
+            }
+        },
+        {
+            "id": "ALRT-2025-01-06-005",
+            "type": "pluie_forte",
+            "gouvernorat": "Kairouan",
+            "severity": "orange",
+            "issued_at": "2025-01-06T14:00:00+01:00",
+            "expires_at": "2025-01-07T00:00:00+01:00",
+            "affected_areas": [
+                "Kairouan Nord",
+                "Kairouan Sud",
+                "Haffouz",
+                "Sbikha"
+            ],
+            "affected_population": 120000,
+            "title": "Vigilance Pluies",
+            "description": "Précipitations modérées à fortes avec cumul de 18mm. Risque de ruissellement urbain.",
+            "recommendations": [
+                "Éviter les sous-sols et parkings souterrains",
+                "Ne pas stationner près des oueds",
+                "Suivre les consignes des autorités"
+            ],
+            "coordinates": {
+                "lat": 35.6781,
+                "lng": 10.0963
+            }
+        },
+        {
+            "id": "ALRT-2025-01-06-006",
+            "type": "vigilance",
+            "gouvernorat": "Tunis",
+            "severity": "jaune",
+            "issued_at": "2025-01-06T10:00:00+01:00",
+            "expires_at": "2025-01-06T22:00:00+01:00",
+            "affected_areas": [
+                "Bab El Bhar",
+                "La Marsa",
+                "Le Kram",
+                "Carthage"
+            ],
+            "affected_population": 250000,
+            "title": "Vigilance Météo",
+            "description": "Pluies légères à modérées avec cumul de 12mm. Prudence sur les routes.",
+            "recommendations": [
+                "Adapter la vitesse sur routes mouillées",
+                "Maintenir les distances de sécurité",
+                "Signaler les zones inondées"
+            ],
+            "coordinates": {
+                "lat": 36.8065,
+                "lng": 10.1815
+            }
+        }
+    ],
+    "alert_statistics": {
+        "today": {
+            "total": 6,
+            "rouge": 2,
+            "orange": 3,
+            "jaune": 1,
+            "vert": 0
+        },
+        "this_week": {
+            "total": 12,
+            "rouge": 3,
+            "orange": 5,
+            "jaune": 4,
+            "vert": 0
+        },
+        "this_month": {
+            "total": 28,
+            "rouge": 5,
+            "orange": 12,
+            "jaune": 11,
+            "vert": 0
+        }
+    },
+    "alert_types": {
+        "inondation": {
+            "label": "Inondation",
+            "icon": "droplets",
+            "color": "#3B82F6"
+        },
+        "vent_violent": {
+            "label": "Vents Violents",
+            "icon": "wind",
+            "color": "#6366F1"
+        },
+        "pluie_forte": {
+            "label": "Pluies Fortes",
+            "icon": "cloud-rain",
+            "color": "#0EA5E9"
+        },
+        "orage": {
+            "label": "Orage",
+            "icon": "cloud-lightning",
+            "color": "#8B5CF6"
+        },
+        "canicule": {
+            "label": "Canicule",
+            "icon": "thermometer-sun",
+            "color": "#F59E0B"
+        },
+        "froid": {
+            "label": "Grand Froid",
+            "icon": "snowflake",
+            "color": "#06B6D4"
+        },
+        "vigilance": {
+            "label": "Vigilance Générale",
+            "icon": "alert-triangle",
+            "color": "#EAB308"
+        }
+    }
+}

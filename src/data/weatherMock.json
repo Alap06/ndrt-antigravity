@@ -1,0 +1,447 @@
+{
+    "current_conditions": {
+        "bizerte": {
+            "gouvernorat": "Bizerte",
+            "timestamp": "2025-01-06T16:00:00+01:00",
+            "temperature": 12,
+            "feels_like": 9,
+            "humidity": 89,
+            "pressure": 1008,
+            "precipitation": 49,
+            "precipitation_1h": 8,
+            "wind_speed": 45,
+            "wind_direction": "NW",
+            "wind_gusts": 65,
+            "visibility": 3,
+            "uv_index": 1,
+            "cloud_cover": 95,
+            "weather_code": 502,
+            "weather_description": "Pluie intense",
+            "weather_icon": "rain_heavy"
+        },
+        "kasserine": {
+            "gouvernorat": "Kasserine",
+            "timestamp": "2025-01-06T16:00:00+01:00",
+            "temperature": 8,
+            "feels_like": 4,
+            "humidity": 92,
+            "pressure": 1005,
+            "precipitation": 35,
+            "precipitation_1h": 6,
+            "wind_speed": 38,
+            "wind_direction": "W",
+            "wind_gusts": 55,
+            "visibility": 4,
+            "uv_index": 1,
+            "cloud_cover": 100,
+            "weather_code": 502,
+            "weather_description": "Pluie intense",
+            "weather_icon": "rain_heavy"
+        },
+        "tunis": {
+            "gouvernorat": "Tunis",
+            "timestamp": "2025-01-06T16:00:00+01:00",
+            "temperature": 15,
+            "feels_like": 13,
+            "humidity": 72,
+            "pressure": 1012,
+            "precipitation": 12,
+            "precipitation_1h": 2,
+            "wind_speed": 25,
+            "wind_direction": "N",
+            "wind_gusts": 35,
+            "visibility": 8,
+            "uv_index": 2,
+            "cloud_cover": 70,
+            "weather_code": 300,
+            "weather_description": "Pluie légère",
+            "weather_icon": "rain_light"
+        },
+        "sfax": {
+            "gouvernorat": "Sfax",
+            "timestamp": "2025-01-06T16:00:00+01:00",
+            "temperature": 18,
+            "feels_like": 17,
+            "humidity": 55,
+            "pressure": 1018,
+            "precipitation": 0,
+            "precipitation_1h": 0,
+            "wind_speed": 15,
+            "wind_direction": "E",
+            "wind_gusts": 22,
+            "visibility": 15,
+            "uv_index": 3,
+            "cloud_cover": 20,
+            "weather_code": 801,
+            "weather_description": "Partiellement nuageux",
+            "weather_icon": "partly_cloudy"
+        },
+        "sousse": {
+            "gouvernorat": "Sousse",
+            "timestamp": "2025-01-06T16:00:00+01:00",
+            "temperature": 17,
+            "feels_like": 16,
+            "humidity": 60,
+            "pressure": 1016,
+            "precipitation": 0,
+            "precipitation_1h": 0,
+            "wind_speed": 18,
+            "wind_direction": "NE",
+            "wind_gusts": 28,
+            "visibility": 12,
+            "uv_index": 3,
+            "cloud_cover": 35,
+            "weather_code": 802,
+            "weather_description": "Nuages épars",
+            "weather_icon": "partly_cloudy"
+        },
+        "jendouba": {
+            "gouvernorat": "Jendouba",
+            "timestamp": "2025-01-06T16:00:00+01:00",
+            "temperature": 10,
+            "feels_like": 6,
+            "humidity": 85,
+            "pressure": 1006,
+            "precipitation": 28,
+            "precipitation_1h": 5,
+            "wind_speed": 32,
+            "wind_direction": "W",
+            "wind_gusts": 48,
+            "visibility": 5,
+            "uv_index": 1,
+            "cloud_cover": 90,
+            "weather_code": 501,
+            "weather_description": "Pluie modérée",
+            "weather_icon": "rain"
+        },
+        "kairouan": {
+            "gouvernorat": "Kairouan",
+            "timestamp": "2025-01-06T16:00:00+01:00",
+            "temperature": 14,
+            "feels_like": 12,
+            "humidity": 75,
+            "pressure": 1010,
+            "precipitation": 18,
+            "precipitation_1h": 3,
+            "wind_speed": 28,
+            "wind_direction": "NW",
+            "wind_gusts": 42,
+            "visibility": 7,
+            "uv_index": 2,
+            "cloud_cover": 80,
+            "weather_code": 501,
+            "weather_description": "Pluie modérée",
+            "weather_icon": "rain"
+        },
+        "zaghouan": {
+            "gouvernorat": "Zaghouan",
+            "timestamp": "2025-01-06T16:00:00+01:00",
+            "temperature": 11,
+            "feels_like": 8,
+            "humidity": 88,
+            "pressure": 1007,
+            "precipitation": 32,
+            "precipitation_1h": 5,
+            "wind_speed": 35,
+            "wind_direction": "NW",
+            "wind_gusts": 50,
+            "visibility": 4,
+            "uv_index": 1,
+            "cloud_cover": 95,
+            "weather_code": 502,
+            "weather_description": "Pluie intense",
+            "weather_icon": "rain_heavy"
+        }
+    },
+    "risk_indices": {
+        "bizerte": {
+            "flood_risk": 92,
+            "storm_risk": 78,
+            "heatwave_risk": 0,
+            "agricultural_risk": 85,
+            "overall_alert_level": "rouge"
+        },
+        "kasserine": {
+            "flood_risk": 88,
+            "storm_risk": 72,
+            "heatwave_risk": 0,
+            "agricultural_risk": 80,
+            "overall_alert_level": "rouge"
+        },
+        "tunis": {
+            "flood_risk": 45,
+            "storm_risk": 35,
+            "heatwave_risk": 0,
+            "agricultural_risk": 30,
+            "overall_alert_level": "jaune"
+        },
+        "jendouba": {
+            "flood_risk": 72,
+            "storm_risk": 65,
+            "heatwave_risk": 0,
+            "agricultural_risk": 70,
+            "overall_alert_level": "orange"
+        },
+        "kairouan": {
+            "flood_risk": 68,
+            "storm_risk": 55,
+            "heatwave_risk": 0,
+            "agricultural_risk": 60,
+            "overall_alert_level": "orange"
+        },
+        "zaghouan": {
+            "flood_risk": 75,
+            "storm_risk": 62,
+            "heatwave_risk": 0,
+            "agricultural_risk": 68,
+            "overall_alert_level": "orange"
+        },
+        "sfax": {
+            "flood_risk": 12,
+            "storm_risk": 8,
+            "heatwave_risk": 0,
+            "agricultural_risk": 15,
+            "overall_alert_level": "vert"
+        },
+        "sousse": {
+            "flood_risk": 15,
+            "storm_risk": 12,
+            "heatwave_risk": 0,
+            "agricultural_risk": 18,
+            "overall_alert_level": "vert"
+        }
+    },
+    "forecast_24h": {
+        "bizerte": [
+            {
+                "hour": "18:00",
+                "temp": 11,
+                "precip": 7,
+                "wind": 42
+            },
+            {
+                "hour": "21:00",
+                "temp": 10,
+                "precip": 5,
+                "wind": 38
+            },
+            {
+                "hour": "00:00",
+                "temp": 9,
+                "precip": 4,
+                "wind": 35
+            },
+            {
+                "hour": "03:00",
+                "temp": 8,
+                "precip": 3,
+                "wind": 30
+            },
+            {
+                "hour": "06:00",
+                "temp": 8,
+                "precip": 2,
+                "wind": 25
+            },
+            {
+                "hour": "09:00",
+                "temp": 10,
+                "precip": 1,
+                "wind": 22
+            },
+            {
+                "hour": "12:00",
+                "temp": 13,
+                "precip": 0,
+                "wind": 18
+            },
+            {
+                "hour": "15:00",
+                "temp": 14,
+                "precip": 0,
+                "wind": 15
+            }
+        ],
+        "kasserine": [
+            {
+                "hour": "18:00",
+                "temp": 7,
+                "precip": 5,
+                "wind": 35
+            },
+            {
+                "hour": "21:00",
+                "temp": 6,
+                "precip": 4,
+                "wind": 32
+            },
+            {
+                "hour": "00:00",
+                "temp": 5,
+                "precip": 3,
+                "wind": 28
+            },
+            {
+                "hour": "03:00",
+                "temp": 4,
+                "precip": 2,
+                "wind": 25
+            },
+            {
+                "hour": "06:00",
+                "temp": 4,
+                "precip": 1,
+                "wind": 22
+            },
+            {
+                "hour": "09:00",
+                "temp": 6,
+                "precip": 0,
+                "wind": 18
+            },
+            {
+                "hour": "12:00",
+                "temp": 10,
+                "precip": 0,
+                "wind": 15
+            },
+            {
+                "hour": "15:00",
+                "temp": 12,
+                "precip": 0,
+                "wind": 12
+            }
+        ]
+    },
+    "historical_24h": {
+        "bizerte": {
+            "total_precipitation": 49,
+            "max_temperature": 14,
+            "min_temperature": 8,
+            "max_wind_speed": 65,
+            "hourly_data": [
+                {
+                    "hour": "00:00",
+                    "precip": 2,
+                    "temp": 11
+                },
+                {
+                    "hour": "01:00",
+                    "precip": 3,
+                    "temp": 10
+                },
+                {
+                    "hour": "02:00",
+                    "precip": 3,
+                    "temp": 10
+                },
+                {
+                    "hour": "03:00",
+                    "precip": 2,
+                    "temp": 9
+                },
+                {
+                    "hour": "04:00",
+                    "precip": 1,
+                    "temp": 9
+                },
+                {
+                    "hour": "05:00",
+                    "precip": 1,
+                    "temp": 8
+                },
+                {
+                    "hour": "06:00",
+                    "precip": 2,
+                    "temp": 8
+                },
+                {
+                    "hour": "07:00",
+                    "precip": 3,
+                    "temp": 9
+                },
+                {
+                    "hour": "08:00",
+                    "precip": 4,
+                    "temp": 10
+                },
+                {
+                    "hour": "09:00",
+                    "precip": 5,
+                    "temp": 11
+                },
+                {
+                    "hour": "10:00",
+                    "precip": 6,
+                    "temp": 12
+                },
+                {
+                    "hour": "11:00",
+                    "precip": 5,
+                    "temp": 13
+                },
+                {
+                    "hour": "12:00",
+                    "precip": 4,
+                    "temp": 14
+                },
+                {
+                    "hour": "13:00",
+                    "precip": 3,
+                    "temp": 14
+                },
+                {
+                    "hour": "14:00",
+                    "precip": 5,
+                    "temp": 13
+                },
+                {
+                    "hour": "15:00",
+                    "precip": 8,
+                    "temp": 12
+                }
+            ]
+        }
+    },
+    "stations_status": {
+        "total": 200,
+        "active": 187,
+        "offline": 13,
+        "maintenance": 5,
+        "last_update": "2025-01-06T16:00:00+01:00",
+        "by_region": {
+            "Nord": {
+                "total": 51,
+                "active": 48
+            },
+            "Nord-Est": {
+                "total": 18,
+                "active": 17
+            },
+            "Nord-Ouest": {
+                "total": 30,
+                "active": 27
+            },
+            "Centre-Est": {
+                "total": 49,
+                "active": 47
+            },
+            "Centre": {
+                "total": 11,
+                "active": 10
+            },
+            "Centre-Ouest": {
+                "total": 15,
+                "active": 14
+            },
+            "Sud-Est": {
+                "total": 19,
+                "active": 18
+            },
+            "Sud-Ouest": {
+                "total": 7,
+                "active": 6
+            }
+        }
+    }
+}

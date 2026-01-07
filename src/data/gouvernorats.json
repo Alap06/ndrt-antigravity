@@ -1,0 +1,596 @@
+{
+    "gouvernorats": [
+        {
+            "id": "tunis",
+            "name": "Tunis",
+            "region": "Nord",
+            "population": 1056247,
+            "superficie": 288,
+            "risk": "modéré",
+            "alerts": 2,
+            "stations": 15,
+            "delegations": [
+                "Médina",
+                "Bab El Bhar",
+                "Bab Souika",
+                "El Omrane",
+                "El Omrane Supérieur",
+                "Ettahrir",
+                "El Menzah",
+                "Cité El Khadra",
+                "El Kabaria",
+                "Séjoumi",
+                "Ezzouhour",
+                "El Ouardia",
+                "El Hrairia",
+                "Sidi El Béchir",
+                "Jebel Jelloud"
+            ]
+        },
+        {
+            "id": "ariana",
+            "name": "Ariana",
+            "region": "Nord",
+            "population": 576088,
+            "superficie": 482,
+            "risk": "faible",
+            "alerts": 0,
+            "stations": 8,
+            "delegations": [
+                "Ariana Ville",
+                "La Soukra",
+                "Raoued",
+                "Kalâat el-Andalous",
+                "Sidi Thabet",
+                "Ettadhamen",
+                "Mnihla"
+            ]
+        },
+        {
+            "id": "ben-arous",
+            "name": "Ben Arous",
+            "region": "Nord",
+            "population": 631842,
+            "superficie": 761,
+            "risk": "élevé",
+            "alerts": 3,
+            "stations": 10,
+            "delegations": [
+                "Ben Arous",
+                "La Nouvelle Médina",
+                "El Mourouj",
+                "Hammam Lif",
+                "Hammam Chott",
+                "Bou Mhel el-Bassatine",
+                "Ezzahra",
+                "Radès",
+                "Mégrine",
+                "Mohamedia",
+                "Fouchana",
+                "Mornag"
+            ]
+        },
+        {
+            "id": "manouba",
+            "name": "Manouba",
+            "region": "Nord",
+            "population": 379518,
+            "superficie": 1137,
+            "risk": "modéré",
+            "alerts": 1,
+            "stations": 7,
+            "delegations": [
+                "Manouba",
+                "Douar Hicher",
+                "Oued Ellil",
+                "Tebourba",
+                "El Battan",
+                "Jedaïda",
+                "Borj El Amri",
+                "Mornaguia"
+            ]
+        },
+        {
+            "id": "nabeul",
+            "name": "Nabeul",
+            "region": "Nord-Est",
+            "population": 787920,
+            "superficie": 2788,
+            "risk": "faible",
+            "alerts": 0,
+            "stations": 12,
+            "delegations": [
+                "Nabeul",
+                "Dar Chaâbane El Fehri",
+                "Béni Khiar",
+                "El Mida",
+                "Kélibia",
+                "Hammam Ghezaz",
+                "El Haouaria",
+                "Takelsa",
+                "Soliman",
+                "Menzel Bouzelfa",
+                "Beni Khalled",
+                "Grombalia",
+                "Bouargoub",
+                "Hammamet",
+                "Korba"
+            ]
+        },
+        {
+            "id": "zaghouan",
+            "name": "Zaghouan",
+            "region": "Nord-Est",
+            "population": 176945,
+            "superficie": 2768,
+            "risk": "élevé",
+            "alerts": 4,
+            "stations": 6,
+            "delegations": [
+                "Zaghouan",
+                "Zriba",
+                "Bir Mcherga",
+                "Djebel Oust",
+                "El Fahs",
+                "Nadhour"
+            ]
+        },
+        {
+            "id": "bizerte",
+            "name": "Bizerte",
+            "region": "Nord",
+            "population": 568219,
+            "superficie": 3685,
+            "risk": "critique",
+            "alerts": 5,
+            "stations": 11,
+            "delegations": [
+                "Bizerte Nord",
+                "Bizerte Sud",
+                "Sejnane",
+                "Djoumine",
+                "Mateur",
+                "Ghezala",
+                "Menzel Bourguiba",
+                "Tinja",
+                "Utique",
+                "Ghar El Melh",
+                "Menzel Jemil",
+                "El Alia",
+                "Ras Jebel"
+            ]
+        },
+        {
+            "id": "beja",
+            "name": "Béja",
+            "region": "Nord-Ouest",
+            "population": 303032,
+            "superficie": 3740,
+            "risk": "modéré",
+            "alerts": 2,
+            "stations": 9,
+            "delegations": [
+                "Béja Nord",
+                "Béja Sud",
+                "Amdoun",
+                "Nefza",
+                "Téboursouk",
+                "Tibar",
+                "Testour",
+                "Goubellat",
+                "Medjez el-Bab"
+            ]
+        },
+        {
+            "id": "jendouba",
+            "name": "Jendouba",
+            "region": "Nord-Ouest",
+            "population": 401477,
+            "superficie": 3102,
+            "risk": "élevé",
+            "alerts": 3,
+            "stations": 8,
+            "delegations": [
+                "Jendouba",
+                "Jendouba Nord",
+                "Bou Salem",
+                "Tabarka",
+                "Aïn Draham",
+                "Fernana",
+                "Ghardimaou",
+                "Oued Melliz",
+                "Balta-Bou Aouane"
+            ]
+        },
+        {
+            "id": "kef",
+            "name": "Kef",
+            "region": "Nord-Ouest",
+            "population": 243156,
+            "superficie": 4965,
+            "risk": "faible",
+            "alerts": 0,
+            "stations": 7,
+            "delegations": [
+                "Kef Ouest",
+                "Kef Est",
+                "Nebeur",
+                "Sakiet Sidi Youssef",
+                "Tajerouine",
+                "Kalâat Senan",
+                "Kalâat Khasba",
+                "Jérissa",
+                "Ksour",
+                "Dahmani",
+                "Le Sers"
+            ]
+        },
+        {
+            "id": "siliana",
+            "name": "Siliana",
+            "region": "Nord-Ouest",
+            "population": 223087,
+            "superficie": 4631,
+            "risk": "modéré",
+            "alerts": 1,
+            "stations": 6,
+            "delegations": [
+                "Siliana Nord",
+                "Siliana Sud",
+                "Bou Arada",
+                "Gaâfour",
+                "El Krib",
+                "El Aroussa",
+                "Bargou",
+                "Makthar",
+                "Rouhia",
+                "Kesra",
+                "Sidi Bou Rouis"
+            ]
+        },
+        {
+            "id": "sousse",
+            "name": "Sousse",
+            "region": "Centre-Est",
+            "population": 674971,
+            "superficie": 2669,
+            "risk": "faible",
+            "alerts": 0,
+            "stations": 14,
+            "delegations": [
+                "Sousse Médina",
+                "Sousse Riadh",
+                "Sousse Jawhara",
+                "Sousse Sidi Abdelhamid",
+                "Hammam Sousse",
+                "Akouda",
+                "Kalâa Kebira",
+                "Sidi Bou Ali",
+                "Hergla",
+                "Enfidha",
+                "Bouficha",
+                "Kondar",
+                "Sidi El Héni",
+                "Msaken",
+                "Kalâa Sghira"
+            ]
+        },
+        {
+            "id": "monastir",
+            "name": "Monastir",
+            "region": "Centre-Est",
+            "population": 548828,
+            "superficie": 1019,
+            "risk": "faible",
+            "alerts": 0,
+            "stations": 10,
+            "delegations": [
+                "Monastir",
+                "Ouerdanine",
+                "Sahline",
+                "Zéramdine",
+                "Jammel",
+                "Beni Hassen",
+                "Moknine",
+                "Ksar Hellal",
+                "Ksibet el-Médiouni",
+                "Bekalta",
+                "Téboulba",
+                "Sayada-Lamta-Bou Hajar"
+            ]
+        },
+        {
+            "id": "mahdia",
+            "name": "Mahdia",
+            "region": "Centre-Est",
+            "population": 410812,
+            "superficie": 2966,
+            "risk": "modéré",
+            "alerts": 1,
+            "stations": 9,
+            "delegations": [
+                "Mahdia",
+                "Bou Merdes",
+                "Ouled Chamekh",
+                "Chorbane",
+                "Hebira",
+                "Essouassi",
+                "El Jem",
+                "Chebba",
+                "Melloulèche",
+                "Sidi Alouane",
+                "Ksour Essef"
+            ]
+        },
+        {
+            "id": "sfax",
+            "name": "Sfax",
+            "region": "Centre-Est",
+            "population": 955421,
+            "superficie": 7545,
+            "risk": "faible",
+            "alerts": 0,
+            "stations": 16,
+            "delegations": [
+                "Sfax Ville",
+                "Sfax Ouest",
+                "Sfax Sud",
+                "Sakiet Eddaïer",
+                "Sakiet Ezzit",
+                "Gremda",
+                "El Ain",
+                "Thyna",
+                "Agareb",
+                "Jebiniana",
+                "El Hencha",
+                "Menzel Chaker",
+                "Ghraiba",
+                "Bir Ali Ben Khalifa",
+                "Skhira",
+                "Kerkennah"
+            ]
+        },
+        {
+            "id": "kairouan",
+            "name": "Kairouan",
+            "region": "Centre",
+            "population": 570559,
+            "superficie": 6712,
+            "risk": "élevé",
+            "alerts": 3,
+            "stations": 11,
+            "delegations": [
+                "Kairouan Nord",
+                "Kairouan Sud",
+                "Chebika",
+                "Sbikha",
+                "Haffouz",
+                "Ala",
+                "Hajeb El Ayoun",
+                "Nasrallah",
+                "Cherarda",
+                "Bou Hajla",
+                "El Oueslatia"
+            ]
+        },
+        {
+            "id": "kasserine",
+            "name": "Kasserine",
+            "region": "Centre-Ouest",
+            "population": 439243,
+            "superficie": 8066,
+            "risk": "critique",
+            "alerts": 6,
+            "stations": 8,
+            "delegations": [
+                "Kasserine Nord",
+                "Kasserine Sud",
+                "Ezzouhour",
+                "Hassi El Ferid",
+                "Sbeitla",
+                "Sbiba",
+                "Jedelienne",
+                "El Ayoun",
+                "Thala",
+                "Hidra",
+                "Foussana",
+                "Feriana",
+                "Majel Bel Abbès"
+            ]
+        },
+        {
+            "id": "sidi-bouzid",
+            "name": "Sidi Bouzid",
+            "region": "Centre-Ouest",
+            "population": 429912,
+            "superficie": 6994,
+            "risk": "modéré",
+            "alerts": 2,
+            "stations": 7,
+            "delegations": [
+                "Sidi Bouzid Ouest",
+                "Sidi Bouzid Est",
+                "Jelma",
+                "Cebbala Ouled Asker",
+                "Birelhfay",
+                "Sidi Ali Ben Aoun",
+                "Menzel Bouzaiane",
+                "Meknassy",
+                "Souk Jedid",
+                "Mezzouna",
+                "Regueb",
+                "Ouled Haffouz"
+            ]
+        },
+        {
+            "id": "gabes",
+            "name": "Gabès",
+            "region": "Sud-Est",
+            "population": 374300,
+            "superficie": 7166,
+            "risk": "faible",
+            "alerts": 0,
+            "stations": 10,
+            "delegations": [
+                "Gabès Médina",
+                "Gabès Ouest",
+                "Gabès Sud",
+                "Ghannouch",
+                "Bouchemma",
+                "Métouia",
+                "Menzel El Habib",
+                "El Hamma",
+                "Matmata",
+                "Nouvelle Matmata",
+                "Mareth",
+                "Dkhilet Toujane"
+            ]
+        },
+        {
+            "id": "medenine",
+            "name": "Medenine",
+            "region": "Sud-Est",
+            "population": 479520,
+            "superficie": 8588,
+            "risk": "faible",
+            "alerts": 0,
+            "stations": 9,
+            "delegations": [
+                "Medenine Nord",
+                "Medenine Sud",
+                "Beni Khedache",
+                "Ben Gardane",
+                "Zarzis",
+                "Houmt Souk",
+                "Midoun",
+                "Ajim",
+                "Sidi Makhlouf"
+            ]
+        },
+        {
+            "id": "tataouine",
+            "name": "Tataouine",
+            "region": "Sud-Est",
+            "population": 149453,
+            "superficie": 38889,
+            "risk": "faible",
+            "alerts": 0,
+            "stations": 5,
+            "delegations": [
+                "Tataouine Nord",
+                "Tataouine Sud",
+                "Smâr",
+                "Bir Lahmar",
+                "Ghomrassen",
+                "Dhehiba",
+                "Remada"
+            ]
+        },
+        {
+            "id": "gafsa",
+            "name": "Gafsa",
+            "region": "Sud-Ouest",
+            "population": 337331,
+            "superficie": 7807,
+            "risk": "modéré",
+            "alerts": 1,
+            "stations": 7,
+            "delegations": [
+                "Gafsa Nord",
+                "Gafsa Sud",
+                "Sidi Aïch",
+                "El Ksar",
+                "Oum El Araies",
+                "Redeyef",
+                "Métlaoui",
+                "Moularès",
+                "El Guettar",
+                "Belkhir",
+                "Sened"
+            ]
+        },
+        {
+            "id": "tozeur",
+            "name": "Tozeur",
+            "region": "Sud-Ouest",
+            "population": 107912,
+            "superficie": 4719,
+            "risk": "faible",
+            "alerts": 0,
+            "stations": 4,
+            "delegations": [
+                "Tozeur",
+                "Degache",
+                "Tameghza",
+                "Nefta",
+                "Hazoua"
+            ]
+        },
+        {
+            "id": "kebili",
+            "name": "Kebili",
+            "region": "Sud-Ouest",
+            "population": 156961,
+            "superficie": 22084,
+            "risk": "faible",
+            "alerts": 0,
+            "stations": 3,
+            "delegations": [
+                "Kebili Nord",
+                "Kebili Sud",
+                "Souk El Ahad",
+                "Douz Nord",
+                "Douz Sud",
+                "Faouar"
+            ]
+        }
+    ],
+    "regions": {
+        "Nord": [
+            "tunis",
+            "ariana",
+            "ben-arous",
+            "manouba",
+            "bizerte"
+        ],
+        "Nord-Est": [
+            "nabeul",
+            "zaghouan"
+        ],
+        "Nord-Ouest": [
+            "beja",
+            "jendouba",
+            "kef",
+            "siliana"
+        ],
+        "Centre-Est": [
+            "sousse",
+            "monastir",
+            "mahdia",
+            "sfax"
+        ],
+        "Centre": [
+            "kairouan"
+        ],
+        "Centre-Ouest": [
+            "kasserine",
+            "sidi-bouzid"
+        ],
+        "Sud-Est": [
+            "gabes",
+            "medenine",
+            "tataouine"
+        ],
+        "Sud-Ouest": [
+            "gafsa",
+            "tozeur",
+            "kebili"
+        ]
+    },
+    "summary": {
+        "total_gouvernorats": 24,
+        "total_population": 11694000,
+        "total_superficie": 163610,
+        "total_stations": 200
+    }
+}
