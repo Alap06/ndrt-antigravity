@@ -78,10 +78,10 @@ const Header = ({ collapsed, currentTime, onMobileMenuClick }) => {
                     <Menu size={20} />
                 </button>
 
-                <div>
+                <div className="header-title-container">
                     <h1 className="header-title">Système Gestion Météo et Rapport de Situation</h1>
                     <p className="header-subtitle">
-                        {translations.surveillance?.realTimeSurveillance || 'Surveillance Météorologique - NDRT Tunisie'}
+                        {translations.surveillance?.realTimeSurveillance || 'Surveillance en Temps Réel'}
                     </p>
                 </div>
             </div>
