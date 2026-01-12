@@ -57,7 +57,7 @@ const Reports = () => {
         gouvernoratId: '',
         date: formattedDate,
         periodeValidite: '00h00 - 24h00',
-        sourceDonnees: 'Open-Meteo API + INM',
+        sourceDonnees: 'Windy | Radar Météo | المرصد التونسي للطقس و المناخ',
 
         // 2. Situation météorologique actuelle
         etatCiel: 'nuageux',
@@ -171,7 +171,7 @@ const Reports = () => {
                     phenomeneConcerne: alerts.length > 0 ? alerts.map(a => a.title).join(', ') : '',
 
                     // Source
-                    sourceDonnees: `${weather.source} + INM (${new Date().toLocaleTimeString(language === 'ar' ? 'ar-TN' : 'fr-TN', { hour: '2-digit', minute: '2-digit' })})`
+                    sourceDonnees: `Windy | Radar Météo | المرصد التونسي للطقس و المناخ (${new Date().toLocaleTimeString(language === 'ar' ? 'ar-TN' : 'fr-TN', { hour: '2-digit', minute: '2-digit' })})`
                 }));
 
             } catch (error) {
@@ -362,7 +362,7 @@ const Reports = () => {
             <div style="font-family: Arial, sans-serif; padding: 20px; color: #333;">
                 <!-- Page 1: Cover & Summary -->
                 <div style="text-align: center; margin-bottom: 40px; border-bottom: 3px solid #E31B23; padding-bottom: 30px;">
-                    <img src="/src/assets/NDRT.png" style="height: 80px; margin-bottom: 15px;" alt="NDRT" onerror="this.style.display='none'"/>
+                    <img src="/src/assets/CRT.png" style="height: 80px; margin-bottom: 15px;" alt="NDRT" onerror="this.style.display='none'"/>
                     <h1 style="color: #E31B23; font-size: 24px; margin: 10px 0;">RAPPORT DE SITUATION MÉTÉOROLOGIQUE CONSOLIDÉ</h1>
                     <h2 style="color: #666; font-size: 16px; margin: 5px 0;">Croissant Rouge Tunisien - Direction Nationale NDRT</h2>
                     <p style="font-size: 14px; color: #888;">République Tunisienne</p>
@@ -379,9 +379,11 @@ const Reports = () => {
                         </tr>
                         <tr>
                             <td style="padding: 8px 0;"><strong>🌐 Source des données:</strong></td>
-                            <td>Open-Meteo API + INM</td>
-                            <td style="padding-left: 30px;"><strong>📊 Gouvernorats analysés:</strong></td>
-                            <td>${totalReports}</td>
+                            <td colspan="3">Windy | Radar Météo | المرصد التونسي للطقس و المناخ</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px 0;"><strong>📊 Gouvernorats analysés:</strong></td>
+                            <td colspan="3">${totalReports}</td>
                         </tr>
                         ${formData.agentName ? `<tr><td style="padding: 8px 0;"><strong>👤 Agent:</strong></td><td colspan="3">${formData.agentName}</td></tr>` : ''}
                     </table>
@@ -537,10 +539,10 @@ const Reports = () => {
         combinedHTML += `
                 <!-- Footer -->
                 <div style="margin-top: 40px; padding-top: 20px; border-top: 3px solid #E31B23; text-align: center;">
-                    <img src="/src/assets/NDRT.png" style="height: 50px; margin-bottom: 10px; opacity: 0.8;" alt="NDRT" onerror="this.style.display='none'"/>
+                    <img src="/src/assets/CRT.png" style="height: 50px; margin-bottom: 10px; opacity: 0.8;" alt="NDRT" onerror="this.style.display='none'"/>
                     <p style="font-size: 13px; color: #E31B23; font-weight: bold;">Croissant Rouge Tunisien - NDRT</p>
                     <p style="font-size: 11px; color: #666;">Direction Nationale de la Réponse aux Catastrophes</p>
-                    <p style="font-size: 10px; color: #888;">Document généré le ${new Date().toLocaleString('fr-TN')} | Source: Open-Meteo API</p>
+                    <p style="font-size: 10px; color: #888;">Document généré le ${new Date().toLocaleString('fr-TN')} | Sources: Windy, Radar Météo, المرصد التونسي للطقس و المناخ</p>
                     <p style="font-size: 9px; color: #aaa; margin-top: 10px;">Ce rapport est généré automatiquement à des fins de surveillance et de préparation aux situations d'urgence.</p>
                 </div>
             </div>
@@ -1380,7 +1382,7 @@ const Reports = () => {
                             }}>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
                                     <img
-                                        src="/src/assets/NDRT.png"
+                                        src="/src/assets/CRT.png"
                                         alt="NDRT"
                                         style={{
                                             width: '70px',
@@ -1701,7 +1703,8 @@ const Reports = () => {
                             }}>
                                 <div>
                                     <strong>Croissant Rouge Tunisien - NDRT</strong><br />
-                                    Système Gestion Météo et Rapport de Situation
+                                    Système Gestion Météo et Rapport de Situation<br />
+                                    <span style={{ fontSize: '8px', color: '#888' }}>Sources: Windy | Radar Météo | المرصد التونسي للطقس و المناخ</span>
                                 </div>
                                 <div style={{ textAlign: 'right' }}>
                                     Document généré le {new Date().toLocaleString('fr-TN')}<br />

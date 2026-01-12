@@ -53,7 +53,7 @@ const Sidebar = ({ collapsed, onToggle, mobileOpen, onMobileClose }) => {
             {/* Header */}
             <div className="sidebar-header">
                 <div className="sidebar-logo">
-                    <img src="/src/assets/NDRT.png" alt="NDRT" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                    <img src="/src/assets/CRT.png" alt="NDRT" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                 </div>
                 {!collapsed && (
                     <div className="sidebar-title">
