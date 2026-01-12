@@ -1923,10 +1923,7 @@ body {
   right: 0;
 }
 
-[dir="rtl"] .stat-card::before,
-[dir="rtl"] .card::before {
-  /* Keep consistent */
-}
+
 
 [dir="rtl"] .sidebar-logo {
   margin-left: var(--spacing-md);
@@ -3057,5 +3054,727 @@ body {
 
   50% {
     opacity: 0.3;
+  }
+}
+
+/* ============================================
+   ENHANCED RESPONSIVE UTILITIES
+   ============================================ */
+
+/* Responsive containers */
+.responsive-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+@media (min-width: 576px) {
+  .responsive-container {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .responsive-container {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .responsive-container {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .responsive-container {
+    max-width: 1140px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .responsive-container {
+    max-width: 1320px;
+  }
+}
+
+/* Responsive flex utilities */
+.flex-responsive {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+
+@media (max-width: 768px) {
+  .flex-responsive {
+    flex-direction: column;
+  }
+}
+
+.flex-responsive>* {
+  flex: 1 1 300px;
+  min-width: 0;
+}
+
+/* Responsive grid system */
+.responsive-grid {
+  display: grid;
+  gap: var(--spacing-md);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+@media (max-width: 575px) {
+  .responsive-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+  }
+}
+
+/* Hide/show responsive utilities */
+.hide-mobile {
+  display: block;
+}
+
+.show-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .hide-mobile {
+    display: none !important;
+  }
+
+  .show-mobile {
+    display: block !important;
+  }
+}
+
+.hide-tablet {
+  display: block;
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .hide-tablet {
+    display: none !important;
+  }
+}
+
+/* ============================================
+   IMPROVED COMPONENT RESPONSIVENESS
+   ============================================ */
+
+/* Stats cards row - responsive */
+.stats-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.stats-row>.stat-card {
+  flex: 1 1 200px;
+  min-width: 150px;
+}
+
+@media (max-width: 575px) {
+  .stats-row>.stat-card {
+    flex: 1 1 100%;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 991px) {
+  .stats-row>.stat-card {
+    flex: 1 1 calc(50% - var(--spacing-md));
+  }
+}
+
+/* Improved card responsiveness */
+.card-responsive {
+  width: 100%;
+  overflow: hidden;
+}
+
+.card-responsive .card-header {
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+
+@media (max-width: 575px) {
+  .card-responsive .card-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .card-responsive .card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+  }
+
+  .card-responsive .card-actions .btn {
+    flex: 1;
+    justify-content: center;
+    min-width: 100px;
+  }
+}
+
+/* Improved dashboard grid */
+@media (max-width: 991px) {
+
+  .dashboard-grid>[class*="col-span-5"],
+  .dashboard-grid>[class*="col-span-4"],
+  .dashboard-grid>[class*="col-span-3"] {
+    grid-column: span 12 !important;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .dashboard-grid>[class*="col-span-5"] {
+    grid-column: span 6 !important;
+  }
+
+  .dashboard-grid>[class*="col-span-4"] {
+    grid-column: span 6 !important;
+  }
+
+  .dashboard-grid>[class*="col-span-3"] {
+    grid-column: span 12 !important;
+  }
+}
+
+/* ============================================
+   IMPROVED FORM RESPONSIVENESS
+   ============================================ */
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.form-row>.form-group {
+  flex: 1 1 200px;
+  margin-bottom: 0;
+}
+
+@media (max-width: 575px) {
+  .form-row {
+    flex-direction: column;
+  }
+
+  .form-row>.form-group {
+    flex: 1 1 100%;
+  }
+}
+
+/* Stacked form on mobile */
+@media (max-width: 575px) {
+  .form-inline {
+    flex-direction: column !important;
+  }
+
+  .form-inline .btn {
+    width: 100%;
+    margin-top: var(--spacing-sm);
+  }
+}
+
+/* ============================================
+   IMPROVED TABLE RESPONSIVENESS
+   ============================================ */
+
+.table-responsive-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 767px) {
+  .table-stack {
+    display: block;
+  }
+
+  .table-stack thead {
+    display: none;
+  }
+
+  .table-stack tbody,
+  .table-stack tr {
+    display: block;
+  }
+
+  .table-stack tr {
+    margin-bottom: var(--spacing-md);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-sm);
+    background: var(--surface);
+  }
+
+  .table-stack td {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border: none;
+  }
+
+  .table-stack td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--text-secondary);
+  }
+}
+
+/* ============================================
+   IMPROVED ALERTS PANEL RESPONSIVENESS
+   ============================================ */
+
+@media (max-width: 767px) {
+  .alerts-panel {
+    max-height: none;
+  }
+
+  .alerts-list {
+    max-height: 350px;
+  }
+
+  .alert-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+  }
+
+  .alert-icon {
+    align-self: flex-start;
+  }
+
+  .alert-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-xs);
+  }
+}
+
+/* ============================================
+   IMPROVED MAP RESPONSIVENESS
+   ============================================ */
+
+.tunisia-map-container {
+  min-height: 300px;
+}
+
+@media (max-width: 575px) {
+  .tunisia-map-container {
+    min-height: 250px;
+    padding: var(--spacing-sm);
+  }
+
+  .tunisia-map svg {
+    max-height: 200px;
+  }
+
+  .map-legend {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-xs);
+  }
+
+  .legend-item {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 991px) {
+  .tunisia-map-container {
+    min-height: 350px;
+  }
+
+  .tunisia-map svg {
+    max-height: 280px;
+  }
+}
+
+/* ============================================
+   IMPROVED WEATHER CARD RESPONSIVENESS
+   ============================================ */
+
+@media (max-width: 575px) {
+  .weather-current {
+    padding: var(--spacing-md);
+  }
+
+  .weather-location h2 {
+    font-size: var(--font-size-lg);
+  }
+
+  .weather-temp {
+    font-size: 2.5rem;
+  }
+
+  .weather-details {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-xs);
+  }
+
+  .weather-detail {
+    padding: var(--spacing-xs);
+  }
+
+  .weather-detail-value {
+    font-size: var(--font-size-base);
+  }
+
+  .weather-detail-label {
+    font-size: 10px;
+  }
+}
+
+/* ============================================
+   IMPROVED RISK PANEL RESPONSIVENESS
+   ============================================ */
+
+@media (max-width: 575px) {
+  .risk-panel {
+    padding: var(--spacing-sm);
+  }
+
+  .risk-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+  }
+
+  .risk-level {
+    align-self: flex-start;
+  }
+
+  .risk-meters {
+    gap: var(--spacing-md);
+  }
+}
+
+/* ============================================
+   GOUVERNORATS GRID IMPROVEMENTS
+   ============================================ */
+
+@media (max-width: 400px) {
+  .gouvernorats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gouvernorat-card {
+    padding: var(--spacing-xs);
+  }
+
+  .gouvernorat-name {
+    font-size: var(--font-size-sm);
+  }
+
+  .gouvernorat-stats {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+}
+
+@media (min-width: 401px) and (max-width: 575px) {
+  .gouvernorats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+  .gouvernorats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .gouvernorats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .gouvernorats-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .gouvernorats-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+/* ============================================
+   REPORTS PAGE IMPROVEMENTS
+   ============================================ */
+
+.reports-page {
+  width: 100%;
+}
+
+.reports-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-lg);
+}
+
+.reports-form {
+  flex: 1 1 350px;
+  min-width: 280px;
+}
+
+.reports-preview {
+  flex: 1 1 400px;
+  min-width: 300px;
+}
+
+@media (max-width: 991px) {
+  .reports-content {
+    flex-direction: column;
+  }
+
+  .reports-form,
+  .reports-preview {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  .reports-preview>div {
+    position: relative !important;
+    top: 0 !important;
+  }
+}
+
+@media (max-width: 575px) {
+  .reports-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-sm);
+  }
+
+  .reports-header>div:first-child {
+    text-align: center;
+  }
+
+  .reports-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+
+  .reports-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .pdf-preview {
+    padding: var(--spacing-sm) !important;
+    font-size: 8px !important;
+  }
+}
+
+/* ============================================
+   SETTINGS PAGE IMPROVEMENTS
+   ============================================ */
+
+.settings-grid {
+  display: grid;
+  gap: var(--spacing-lg);
+}
+
+@media (min-width: 992px) {
+  .settings-grid {
+    grid-template-columns: 250px 1fr;
+  }
+}
+
+@media (max-width: 991px) {
+  .settings-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .settings-sidebar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .settings-nav-item {
+    flex: 1 1 auto;
+    min-width: 120px;
+    text-align: center;
+  }
+}
+
+/* ============================================
+   ANALYTICS PAGE IMPROVEMENTS
+   ============================================ */
+
+.analytics-grid {
+  display: grid;
+  gap: var(--spacing-lg);
+}
+
+@media (min-width: 992px) {
+  .analytics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .analytics-grid .chart-full-width {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 991px) {
+  .analytics-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 575px) {
+  .chart-container {
+    padding: var(--spacing-sm);
+  }
+
+  .chart-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+  }
+}
+
+/* ============================================
+   TOUCH DEVICE OPTIMIZATIONS
+   ============================================ */
+
+@media (hover: none) and (pointer: coarse) {
+
+  /* Larger touch targets */
+  .btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .nav-item {
+    min-height: 48px;
+  }
+
+  .form-input,
+  .form-select,
+  .form-textarea {
+    min-height: 44px;
+    font-size: 16px;
+    /* Prevent zoom on iOS */
+  }
+
+  /* Remove hover effects on touch devices */
+  .card:hover,
+  .gouvernorat-card:hover,
+  .btn:hover {
+    transform: none;
+  }
+
+  /* Add active states instead */
+  .btn:active {
+    transform: scale(0.98);
+  }
+
+  .gouvernorat-card:active {
+    transform: scale(0.98);
+    border-color: var(--primary);
+  }
+}
+
+/* ============================================
+   LANDSCAPE MODE OPTIMIZATIONS
+   ============================================ */
+
+@media (max-width: 900px) and (orientation: landscape) {
+  :root {
+    --header-height: 50px;
+  }
+
+  .sidebar {
+    width: 200px;
+  }
+
+  .page-content {
+    padding: var(--spacing-sm);
+  }
+
+  .dashboard-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .gouvernorats-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .tunisia-map-container {
+    min-height: 200px;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY IMPROVEMENTS
+   ============================================ */
+
+/* Focus visible for keyboard navigation */
+*:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Reduced motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High contrast mode improvements */
+@media (prefers-contrast: high) {
+
+  .card,
+  .stat-card,
+  .gouvernorat-card {
+    border-width: 2px;
+  }
+
+  .btn {
+    border: 2px solid currentColor;
+  }
+}
+
+/* ============================================
+   SAFE AREA INSETS (for notched devices)
+   ============================================ */
+
+@supports (padding: env(safe-area-inset-top)) {
+  .header {
+    padding-top: env(safe-area-inset-top);
+    height: calc(var(--header-height) + env(safe-area-inset-top));
+  }
+
+  .sidebar {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .page-content {
+    padding-left: max(var(--spacing-md), env(safe-area-inset-left));
+    padding-right: max(var(--spacing-md), env(safe-area-inset-right));
+    padding-bottom: env(safe-area-inset-bottom);
   }
 }
