@@ -319,6 +319,8 @@ const Reports = () => {
                 const risks = weatherService.calculateRiskIndices(weather);
 
                 // Fetch AI Data for Precision/Confidence (using selected date)
+                // Fetch AI Data for Precision/Confidence (using selected date)
+                // Use governorateId compatible with weatherApi
                 const aiData = await weatherService.getAIAnalysis(['ecmwf', 'weathernext'], gouv.id, language, formData.date);
 
                 allWeatherData[gouv.id] = { ...weather, risks };
@@ -390,7 +392,7 @@ const Reports = () => {
                     <table style="width: 100%; color: white; font-size: 13px;">
                         <tr>
                             <td style="padding: 8px 0;"><strong>📅 Date du rapport:</strong></td>
-                            <td>${formattedDate}</td>
+                            <td>${formData.date}</td>
                             <td style="padding-left: 30px;"><strong>⏰ Période de validité:</strong></td>
                             <td>00h00 - 24h00</td>
                         </tr>
@@ -532,6 +534,29 @@ const Reports = () => {
                             <td style="padding: 6px; border: 1px solid #eee;" colspan="3">${getPhenomenesFromWeather(weather)}</td>
                         </tr>
                     </table>
+
+                    ${report.aiData ? `
+                    <div style="margin-top: 15px; margin-bottom: 15px; padding: 10px; background: #fff5f5; border-radius: 4px; border: 1px solid #ffcccc;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px; font-weight: bold; font-size: 11px; color: #1e3a5f;">
+                            <span>🎯 Consensus IA (Confiance: ${Math.round(report.aiData.consensus.confidence * 100)}%)</span>
+                            <span style={{ color: '#E31B23' }}>~${report.aiData.consensus.temp}°C</span>
+                        </div>
+                        ${report.aiData.consensus.prediction ? `
+                            <div style="margin-bottom: 8px; padding: 5px; background: white; border-left: 3px solid #E31B23; font-size: 10px; color: #555; font-style: italic;">
+                                <strong>Prévision Situation:</strong> ${report.aiData.consensus.prediction}
+                            </div>
+                        ` : ''}
+                        <table style="width: 100%; font-size: 10px;">
+                            ${Object.entries(report.aiData.models).map(([key, data]) => `
+                                <tr>
+                                    <td style="padding: 2px 0;"><strong>${data.name}</strong></td>
+                                    <td style="padding: 2px 0;">${data.precision}</td>
+                                    <td style="padding: 2px 0; text-align: right;">${data.forecast?.temperature || '-'}°C (${Math.round(data.confidence * 100)}% Conf.)</td>
+                                </tr>
+                            `).join('')}
+                        </table>
+                    </div>
+                    ` : ''}
 
                     ${alerts.length > 0 ? `
                     <div style="margin-top: 10px; background: rgba(239,68,68,0.05); padding: 10px; border-radius: 5px;">
