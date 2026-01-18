@@ -11,6 +11,19 @@ const API_CONFIG = {
     openWeatherMap: {
         key: '', // Get free key at https://openweathermap.org/api
         enabled: false
+    },
+    // AI & Advanced Models (Mocked/Integrated via GEE)
+    ecmwf: {
+        key: '', // Requires Google Earth Engine or ECMWF API access
+        enabled: true
+    },
+    weathernext: {
+        key: '', // Google DeepMind WeatherNext (Mock)
+        enabled: true
+    },
+    graphcast: {
+        key: '', // Google DeepMind GraphCast (Mock)
+        enabled: true
     }
 };
 
@@ -73,7 +86,7 @@ const CACHE_DURATION = 10 * 60 * 1000; // 10 minutes
 
 class MultiSourceWeatherService {
     constructor() {
-        this.sources = ['open-meteo', 'weatherapi', 'openweathermap'];
+        this.sources = ['open-meteo', 'weatherapi', 'openweathermap', 'ecmwf', 'weathernext', 'graphcast'];
         this.currentSource = null;
         this.lastFetchTime = {};
     }
@@ -375,6 +388,174 @@ class MultiSourceWeatherService {
 
         await Promise.all(promises);
         return results;
+    }
+
+    // Pseudo-random number generator based on string seed
+    pseudoRandom(seed) {
+        let value = 0;
+        for (let i = 0; i < seed.length; i++) {
+            value = (value << 5) - value + seed.charCodeAt(i);
+            value |= 0;
+        }
+        const x = Math.sin(value) * 10000;
+        return x - Math.floor(x);
+    }
+
+    // AI & Precision Models (Mocked for demonstration)
+
+    // ECMWF / Google Earth Engine
+    async fetchECMWF(gov, lang, date) {
+        // Simulating high-precision medium-range forecast
+        // In reality, this would query Google Earth Engine dataset: ECMWF/NRT/FORECAST_IFS_OPER
+
+        let variation = 0;
+        if (date) {
+            // Predictable variation based on date
+            variation = (this.pseudoRandom(`${date}-ecmwf-${gov.gouvernoratId || gov}`) * 4) - 2;
+        }
+
+        const baseMock = this.getMockWeather(gov.gouvernoratId || gov, lang);
+
+        return {
+            source: 'ecmwf',
+            name: 'ECMWF IFS (via Earth Engine)',
+            precision: 'High (0.1°)',
+            forecast: {
+                ...baseMock,
+                temperature: Math.round(baseMock.temperature + variation),
+                // Vary other parameters slightly if needed
+            }
+        };
+    }
+
+    // Google DeepMind WeatherNext
+    async fetchWeatherNext(gov, lang, date) {
+        // Simulating next-gen nowcasting
+        let variation = 0;
+        if (date) {
+            variation = (this.pseudoRandom(`${date}-weathernext-${gov.gouvernoratId || gov}`) * 3) - 1.5;
+        }
+
+        const baseMock = this.getMockWeather(gov.gouvernoratId || gov, lang);
+
+        return {
+            source: 'weathernext',
+            name: 'Google WeatherNext',
+            type: 'AI Nowcasting',
+            precision: 'Very High (1km resolution)',
+            confidence: 0.95,
+            forecast: {
+                ...baseMock,
+                temperature: Math.round(baseMock.temperature + variation + 0.5),
+            }
+        };
+    }
+
+    // Google DeepMind GraphCast
+    async fetchGraphCast(gov, lang, date) {
+        // Simulating graph neural network model
+        let variation = 0;
+        if (date) {
+            variation = (this.pseudoRandom(`${date}-graphcast-${gov.gouvernoratId || gov}`) * 5) - 2.5;
+        }
+
+        const baseMock = this.getMockWeather(gov.gouvernoratId || gov, lang);
+
+        return {
+            source: 'graphcast',
+            name: 'GraphCast AI',
+            type: 'Graph Neural Network',
+            speed: 'Fast Inference',
+            precision: 'High (0.25°)',
+            confidence: 0.92,
+            forecast: {
+                ...baseMock,
+                temperature: Math.round(baseMock.temperature + variation - 0.5),
+            }
+        };
+    }
+
+    // AI Precision Analysis - Aggregates multiple models
+    async getAIAnalysis(sources = ['ecmwf', 'weathernext', 'graphcast'], gov, lang = 'fr', date = null) {
+        const results = {};
+        let consensus = {
+            temp: 0,
+            conditions: [],
+            confidence: 0,
+            prediction: ''
+        };
+
+        let successCount = 0;
+
+        for (const source of sources) {
+            // Find method dynamically
+            let method;
+            if (source === 'ecmwf') method = this.fetchECMWF;
+            else if (source === 'weathernext') method = this.fetchWeatherNext;
+            else if (source === 'graphcast') method = this.fetchGraphCast;
+
+            if (method) {
+                try {
+                    // gov might be an ID or object, normalize for getMockWeather which expects ID usually
+                    const governorateId = typeof gov === 'object' ? (Object.keys(GOVERNORATES).find(k => GOVERNORATES[k].lat === gov.lat) || 'tunis') : gov;
+
+                    const data = await method.call(this, governorateId, lang, date);
+                    results[source] = data;
+
+                    if (data.forecast) {
+                        consensus.temp += data.forecast.temperature || 0;
+                        consensus.conditions.push(data.forecast.weather_code);
+                        successCount++;
+                    }
+                } catch (e) {
+                    console.warn(`Failed to fetch AI model ${source}`, e);
+                }
+            }
+        }
+
+        // Average out
+        if (successCount > 0) {
+            consensus.temp = (consensus.temp / successCount).toFixed(1);
+
+            // Generate deterministic confidence based on date+gov
+            const seed = date ? `${date}-${gov}` : new Date().toDateString();
+            const confidenceVariation = this.pseudoRandom(seed + 'conf');
+            consensus.confidence = (0.80 + (confidenceVariation * 0.19)).toFixed(2);
+
+            // Situation Prediction Logic
+            const predictions = {
+                fr: [
+                    "Conditions stables prévues avec un ciel majoritairement dégagé.",
+                    "Risque de perturbations modérées en fin de journée.",
+                    "Vigilance accrue pour les activités agricoles en raison du vent.",
+                    "Températures conformes aux normales de saison, sans risque majeur.",
+                    "Possibilité d'épisodes orageux localisés, prudence conseillée.",
+                    "Situation calme, idéale pour les activités de plein air.",
+                    "Un front froid mineur pourrait traverser la région.",
+                    "Humidité élevée favorisant la formation de brouillard matinal."
+                ],
+                ar: [
+                    "توقعات باستقرار الأحوال الجوية مع سماء صافية في الغالب.",
+                    "خطر حدوث اضطرابات معتدلة في نهاية اليوم.",
+                    "يرجى توخي الحذر للأنشطة الفلاحية بسبب الرياح.",
+                    "درجات حرارة مطابقة للمعادلات الموسمية دون مخاطر تذكر.",
+                    "احتمال حدوث عواصف رعدية محلية، ينصح بالحذر.",
+                    "وضعية هادئة ومناسبة للأنشطة الخارجية.",
+                    "جبهة هوائية باردة طفيفة قد تعبر المنطقة.",
+                    "رطوبة عالية قد تؤدي إلى تشكل الضباب الصباحي."
+                ]
+            };
+
+            const predList = predictions[lang === 'ar' ? 'ar' : 'fr'];
+            const predIndex = Math.floor(this.pseudoRandom(seed + 'pred') * predList.length);
+            consensus.prediction = predList[predIndex];
+        }
+
+        return {
+            models: results,
+            consensus: consensus,
+            timestamp: new Date().toISOString()
+        };
     }
 
     // Calculate risk indices

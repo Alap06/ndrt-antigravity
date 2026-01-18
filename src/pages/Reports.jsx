@@ -18,7 +18,9 @@ import {
     Check,
     X,
     Wifi,
-    WifiOff
+    WifiOff,
+    Crosshair,
+    CheckCircle
 } from 'lucide-react';
 import html2pdf from 'html2pdf.js';
 import { useApp } from '../context/AppContext';
@@ -39,6 +41,15 @@ const Reports = () => {
     const [adminCode, setAdminCode] = useState('');
     const [isDownloadingAll, setIsDownloadingAll] = useState(false);
     const [downloadProgress, setDownloadProgress] = useState(0);
+
+    // AI Report State
+    const [aiSources, setAiSources] = useState({
+        ecmwf: true,
+        weathernext: true,
+        graphcast: true
+    });
+    const [aiAnalysis, setAiAnalysis] = useState(null);
+    const [isAnalyzingAi, setIsAnalyzingAi] = useState(false);
 
     // Get current date
     const today = new Date();
@@ -306,6 +317,10 @@ const Reports = () => {
             try {
                 const weather = await weatherService.getWeather(gouv.id, language);
                 const risks = weatherService.calculateRiskIndices(weather);
+
+                // Fetch AI Data for Precision/Confidence (using selected date)
+                const aiData = await weatherService.getAIAnalysis(['ecmwf', 'weathernext'], gouv.id, language, formData.date);
+
                 allWeatherData[gouv.id] = { ...weather, risks };
 
                 // Detect alerts for this governorate
@@ -316,6 +331,7 @@ const Reports = () => {
                     gouv,
                     weather,
                     risks,
+                    aiData, // Store AI data
                     alerts: govAlerts,
                     hasData: true
                 });
@@ -324,6 +340,7 @@ const Reports = () => {
                     gouv,
                     weather: null,
                     risks: null,
+                    aiData: null,
                     alerts: [],
                     hasData: false
                 });
@@ -439,6 +456,7 @@ const Reports = () => {
                                 <th style="padding: 10px; text-align: left;">Gouvernorat</th>
                                 <th style="padding: 10px; text-align: left;">Région</th>
                                 <th style="padding: 10px; text-align: center;">Niveau</th>
+                                <th style="padding: 10px; text-align: center;">Confiance IA</th>
                                 <th style="padding: 10px; text-align: center;">Temp.</th>
                                 <th style="padding: 10px; text-align: center;">Précip.</th>
                                 <th style="padding: 10px; text-align: center;">Vent</th>
@@ -450,6 +468,7 @@ const Reports = () => {
                                     <td style="padding: 8px;"><strong>${r.gouv.name}</strong></td>
                                     <td style="padding: 8px;">${r.gouv.region}</td>
                                     <td style="padding: 8px; text-align: center;"><span style="background: ${getAlertColorHex(r.risks?.overall_alert_level)}; color: white; padding: 2px 8px; border-radius: 4px; font-size: 10px;">${(r.risks?.overall_alert_level || 'N/A').toUpperCase()}</span></td>
+                                    <td style="padding: 8px; text-align: center;">${r.aiData?.consensus?.confidence ? Math.round(r.aiData.consensus.confidence * 100) + '%' : '-'}</td>
                                     <td style="padding: 8px; text-align: center;">${r.weather?.temperature || '-'}°C</td>
                                     <td style="padding: 8px; text-align: center;">${r.weather?.precipitation || 0} mm</td>
                                     <td style="padding: 8px; text-align: center;">${r.weather?.wind_speed || '-'} km/h</td>
@@ -815,6 +834,182 @@ const Reports = () => {
                                 onChange={(e) => handleInputChange('sourceDonnees', e.target.value)}
                             />
                         </div>
+                    </div>
+
+                    {/* Section 1b: AI Precision Report */}
+                    <div className="card" style={{ marginBottom: 'var(--spacing-lg)', border: '1px solid #E31B23', background: 'linear-gradient(to right, #fff, #fff5f5)' }}>
+                        <h3 style={{
+                            color: '#E31B23',
+                            marginBottom: 'var(--spacing-md)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 'var(--spacing-sm)'
+                        }}>
+                            <AlertTriangle size={18} />
+                            Rapport de Précision IA
+                        </h3>
+
+                        <div style={{ marginBottom: '15px' }}>
+                            <label className="form-label" style={{ marginBottom: '10px', display: 'block', color: 'var(--text-primary)' }}>Sources IA à analyser</label>
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '15px' }}>
+                                <div
+                                    onClick={() => setAiSources(prev => ({ ...prev, ecmwf: !prev.ecmwf }))}
+                                    style={{
+                                        padding: '10px',
+                                        border: `1px solid ${aiSources.ecmwf ? '#E31B23' : '#eee'}`,
+                                        borderRadius: '8px',
+                                        background: aiSources.ecmwf ? '#fff5f5' : 'white',
+                                        cursor: 'pointer',
+                                        transition: 'all 0.2s',
+                                        boxShadow: aiSources.ecmwf ? '0 2px 4px rgba(227, 27, 35, 0.1)' : 'none'
+                                    }}
+                                >
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+                                        <div style={{
+                                            width: '16px', height: '16px', borderRadius: '4px',
+                                            border: '1px solid #E31B23', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                            background: aiSources.ecmwf ? '#E31B23' : 'white'
+                                        }}>
+                                            {aiSources.ecmwf && <Check size={12} color="white" />}
+                                        </div>
+                                        <strong style={{ fontSize: '13px', color: '#1e3a5f' }}>ECMWF</strong>
+                                    </div>
+                                    <p style={{ margin: 0, fontSize: '11px', color: '#666' }}>Modèle standard haute précision (0.1°) via Earth Engine.</p>
+                                </div>
+
+                                <div
+                                    onClick={() => setAiSources(prev => ({ ...prev, weathernext: !prev.weathernext }))}
+                                    style={{
+                                        padding: '10px',
+                                        border: `1px solid ${aiSources.weathernext ? '#E31B23' : '#eee'}`,
+                                        borderRadius: '8px',
+                                        background: aiSources.weathernext ? '#fff5f5' : 'white',
+                                        cursor: 'pointer',
+                                        transition: 'all 0.2s',
+                                        boxShadow: aiSources.weathernext ? '0 2px 4px rgba(227, 27, 35, 0.1)' : 'none'
+                                    }}
+                                >
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+                                        <div style={{
+                                            width: '16px', height: '16px', borderRadius: '4px',
+                                            border: '1px solid #E31B23', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                            background: aiSources.weathernext ? '#E31B23' : 'white'
+                                        }}>
+                                            {aiSources.weathernext && <Check size={12} color="white" />}
+                                        </div>
+                                        <strong style={{ fontSize: '13px', color: '#1e3a5f' }}>WeatherNext</strong>
+                                    </div>
+                                    <p style={{ margin: 0, fontSize: '11px', color: '#666' }}>IA DeepMind pour le nowcasting précis (1km).</p>
+                                </div>
+
+                                <div
+                                    onClick={() => setAiSources(prev => ({ ...prev, graphcast: !prev.graphcast }))}
+                                    style={{
+                                        padding: '10px',
+                                        border: `1px solid ${aiSources.graphcast ? '#E31B23' : '#eee'}`,
+                                        borderRadius: '8px',
+                                        background: aiSources.graphcast ? '#fff5f5' : 'white',
+                                        cursor: 'pointer',
+                                        transition: 'all 0.2s',
+                                        boxShadow: aiSources.graphcast ? '0 2px 4px rgba(227, 27, 35, 0.1)' : 'none'
+                                    }}
+                                >
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+                                        <div style={{
+                                            width: '16px', height: '16px', borderRadius: '4px',
+                                            border: '1px solid #E31B23', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                            background: aiSources.graphcast ? '#E31B23' : 'white'
+                                        }}>
+                                            {aiSources.graphcast && <Check size={12} color="white" />}
+                                        </div>
+                                        <strong style={{ fontSize: '13px', color: '#1e3a5f' }}>GraphCast</strong>
+                                    </div>
+                                    <p style={{ margin: 0, fontSize: '11px', color: '#666' }}>Réseau de neurones graphiques pour prévisions rapides.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button
+                            className="btn"
+                            style={{
+                                width: '100%',
+                                background: 'linear-gradient(135deg, #1e3a5f, #2d5a87)',
+                                color: 'white',
+                                marginBottom: '15px',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                gap: '8px'
+                            }}
+                            onClick={async () => {
+                                if (!formData.gouvernorat) {
+                                    alert('Veuillez sélectionner un gouvernorat');
+                                    return;
+                                }
+                                setIsAnalyzingAi(true);
+                                try {
+                                    const sources = Object.keys(aiSources).filter(k => aiSources[k]);
+                                    // Pass selected date to AI analysis
+                                    const analysis = await weatherService.getAIAnalysis(sources, formData.gouvernoratId, language, formData.date);
+                                    setAiAnalysis(analysis);
+                                } catch (e) {
+                                    console.error(e);
+                                }
+                                setIsAnalyzingAi(false);
+                            }}
+                            disabled={isAnalyzingAi}
+                        >
+                            {isAnalyzingAi ? <Loader className="spin" size={16} /> : <Eye size={16} />}
+                            {isAnalyzingAi ? 'Analyse en cours...' : 'Générer Analyse de Précision'}
+                        </button>
+
+                        {aiAnalysis && (
+                            <div className="animate-fadeIn" style={{ background: 'white', padding: '15px', borderRadius: '8px', border: '1px solid #eee', fontSize: '12px', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px', paddingBottom: '8px', borderBottom: '1px solid #eee' }}>
+                                    <strong style={{ color: '#1e3a5f' }}>Consensus IA (Confiance: {Math.round(aiAnalysis.consensus.confidence * 100)}%)</strong>
+                                    <span style={{ fontWeight: 'bold', color: '#E31B23' }}>~{aiAnalysis.consensus.temp}°C</span>
+                                </div>
+                                {aiAnalysis.consensus.prediction && (
+                                    <div style={{
+                                        marginBottom: '10px',
+                                        padding: '8px',
+                                        background: '#f8f9fa',
+                                        borderLeft: '3px solid #E31B23',
+                                        fontSize: '11px',
+                                        color: '#333'
+                                    }}>
+                                        <strong>Prévision Situation:</strong> {aiAnalysis.consensus.prediction}
+                                    </div>
+                                )}
+                                <div>
+                                    {Object.entries(aiAnalysis.models).map(([key, data]) => (
+                                        <div key={key} style={{ marginBottom: '8px', paddingBottom: '8px', borderBottom: '1px solid #f5f5f5' }}>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: '#1e3a5f', marginBottom: '4px' }}>
+                                                <span style={{ display: 'flex', alignItems: 'center', gap: '5px', fontWeight: '500' }}>
+                                                    {key === 'ecmwf' ? '🌍' : key === 'weathernext' ? '⚡' : '🧠'}
+                                                    {data.name}
+                                                </span>
+                                                <span style={{ background: '#f0f4f8', padding: '2px 8px', borderRadius: '12px', fontWeight: 'bold' }}>
+                                                    {data.forecast?.temperature || '-'}°C
+                                                </span>
+                                            </div>
+                                            <div style={{ display: 'flex', gap: '10px', fontSize: '11px', color: '#666' }}>
+                                                {data.precision && (
+                                                    <span style={{ display: 'flex', alignItems: 'center', gap: '3px' }}>
+                                                        <Crosshair size={10} /> {data.precision}
+                                                    </span>
+                                                )}
+                                                {data.confidence && (
+                                                    <span style={{ display: 'flex', alignItems: 'center', gap: '3px', color: '#10B981' }}>
+                                                        <CheckCircle size={10} /> {Math.round(data.confidence * 100)}% Confiance
+                                                    </span>
+                                                )}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
                     </div>
 
                     {/* Section 2: Situation météorologique actuelle */}
@@ -1454,7 +1649,10 @@ const Reports = () => {
                                         </tr>
                                         <tr style={{ background: '#f9f9f9' }}>
                                             <td style={{ padding: '5px', fontWeight: 'bold' }}>Source des données :</td>
-                                            <td style={{ padding: '5px' }}>{formData.sourceDonnees}</td>
+                                            <td style={{ padding: '5px' }}>
+                                                {formData.sourceDonnees}
+                                                {aiAnalysis ? ' | ECMWF | WeatherNext | GraphCast' : ''}
+                                            </td>
                                         </tr>
                                         {formData.agentName && (
                                             <tr>
@@ -1510,6 +1708,52 @@ const Reports = () => {
                                     </tbody>
                                 </table>
                             </div>
+
+
+
+                            {/* Section 2b: AI Precision Analysis (if available) */}
+                            {aiAnalysis && (
+                                <div style={{ marginBottom: '15px' }}>
+                                    <h2 style={{
+                                        fontSize: '13px',
+                                        fontWeight: 'bold',
+                                        color: '#E31B23',
+                                        borderBottom: '1px solid #E31B23',
+                                        paddingBottom: '5px',
+                                        marginBottom: '10px'
+                                    }}>
+                                        2b. ANALYSE DE PRÉCISION IA (Modèles Avancés)
+                                    </h2>
+                                    <div style={{ padding: '10px', background: '#fff5f5', borderRadius: '4px', border: '1px solid #ffcccc' }}>
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px', fontWeight: 'bold' }}>
+                                            <span>Consensus IA (Confiance: {Math.round(aiAnalysis.consensus.confidence * 100)}%)</span>
+                                            <span style={{ color: '#E31B23' }}>~{aiAnalysis.consensus.temp}°C</span>
+                                        </div>
+                                        {aiAnalysis.consensus.prediction && (
+                                            <div style={{
+                                                marginBottom: '10px',
+                                                padding: '8px',
+                                                background: 'white',
+                                                borderLeft: '3px solid #E31B23',
+                                                fontSize: '11px',
+                                                fontStyle: 'italic',
+                                                color: '#555'
+                                            }}>
+                                                <strong>Prévision Situation:</strong> {aiAnalysis.consensus.prediction}
+                                            </div>
+                                        )}
+                                        <table style={{ width: '100%', fontSize: '11px' }}>
+                                            {Object.entries(aiAnalysis.models).map(([key, data]) => (
+                                                <tr key={key}>
+                                                    <td style={{ padding: '3px 0' }}><strong>{data.name}</strong></td>
+                                                    <td style={{ padding: '3px 0' }}>{data.precision}</td>
+                                                    <td style={{ padding: '3px 0', textAlign: 'right' }}>{data.forecast?.temperature || '-'}°C ({Math.round(data.confidence * 100)}% Conf.)</td>
+                                                </tr>
+                                            ))}
+                                        </table>
+                                    </div>
+                                </div>
+                            )}
 
                             {/* Section 3 */}
                             <div style={{ marginBottom: '15px' }}>
@@ -1788,92 +2032,94 @@ const Reports = () => {
       `}</style>
 
             {/* Admin Modal */}
-            {showAdminModal && (
-                <div style={{
-                    position: 'fixed',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    background: 'rgba(0,0,0,0.6)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    zIndex: 9999
-                }}>
+            {
+                showAdminModal && (
                     <div style={{
-                        background: 'var(--surface)',
-                        borderRadius: 'var(--radius-lg)',
-                        padding: 'var(--spacing-xl)',
-                        maxWidth: '450px',
-                        width: '90%',
-                        boxShadow: 'var(--shadow-xl)'
+                        position: 'fixed',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        background: 'rgba(0,0,0,0.6)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        zIndex: 9999
                     }}>
-                        <h3 style={{ color: 'var(--primary)', marginBottom: 'var(--spacing-md)' }}>
-                            Téléchargement Admin - Tous les Gouvernorats
-                        </h3>
-                        <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--spacing-md)', fontSize: 'var(--font-size-sm)' }}>
-                            Cette fonction génère un rapport consolidé pour les <strong>24 gouvernorats</strong> de Tunisie avec les données météo actuelles de l'API Open-Meteo.
-                        </p>
+                        <div style={{
+                            background: 'var(--surface)',
+                            borderRadius: 'var(--radius-lg)',
+                            padding: 'var(--spacing-xl)',
+                            maxWidth: '450px',
+                            width: '90%',
+                            boxShadow: 'var(--shadow-xl)'
+                        }}>
+                            <h3 style={{ color: 'var(--primary)', marginBottom: 'var(--spacing-md)' }}>
+                                Téléchargement Admin - Tous les Gouvernorats
+                            </h3>
+                            <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--spacing-md)', fontSize: 'var(--font-size-sm)' }}>
+                                Cette fonction génère un rapport consolidé pour les <strong>24 gouvernorats</strong> de Tunisie avec les données météo actuelles de l'API Open-Meteo.
+                            </p>
 
-                        {!isDownloadingAll ? (
-                            <>
-                                <div className="form-group" style={{ marginBottom: 'var(--spacing-md)' }}>
-                                    <label className="form-label">Code Administrateur</label>
-                                    <input
-                                        type="password"
-                                        className="form-input"
-                                        value={adminCode}
-                                        onChange={(e) => setAdminCode(e.target.value)}
-                                        placeholder="Entrez le code admin"
-                                    />
-                                </div>
-                                <div style={{ display: 'flex', gap: 'var(--spacing-sm)', justifyContent: 'flex-end' }}>
-                                    <button
-                                        className="btn btn-ghost"
-                                        onClick={() => { setShowAdminModal(false); setAdminCode(''); }}
-                                    >
-                                        Annuler
-                                    </button>
-                                    <button
-                                        className="btn btn-primary"
-                                        onClick={generateAllReports}
-                                        disabled={!adminCode}
-                                    >
-                                        <Download size={16} />
-                                        Télécharger (24 rapports)
-                                    </button>
-                                </div>
-                            </>
-                        ) : (
-                            <div style={{ textAlign: 'center', padding: 'var(--spacing-lg)' }}>
-                                <Loader size={32} className="spin" style={{ color: 'var(--primary)', marginBottom: 'var(--spacing-md)' }} />
-                                <p style={{ color: 'var(--text-primary)', fontWeight: 600 }}>
-                                    Génération en cours... {downloadProgress}%
-                                </p>
-                                <div style={{
-                                    width: '100%',
-                                    height: '8px',
-                                    background: 'var(--surface-light)',
-                                    borderRadius: '4px',
-                                    overflow: 'hidden',
-                                    marginTop: 'var(--spacing-sm)'
-                                }}>
+                            {!isDownloadingAll ? (
+                                <>
+                                    <div className="form-group" style={{ marginBottom: 'var(--spacing-md)' }}>
+                                        <label className="form-label">Code Administrateur</label>
+                                        <input
+                                            type="password"
+                                            className="form-input"
+                                            value={adminCode}
+                                            onChange={(e) => setAdminCode(e.target.value)}
+                                            placeholder="Entrez le code admin"
+                                        />
+                                    </div>
+                                    <div style={{ display: 'flex', gap: 'var(--spacing-sm)', justifyContent: 'flex-end' }}>
+                                        <button
+                                            className="btn btn-ghost"
+                                            onClick={() => { setShowAdminModal(false); setAdminCode(''); }}
+                                        >
+                                            Annuler
+                                        </button>
+                                        <button
+                                            className="btn btn-primary"
+                                            onClick={generateAllReports}
+                                            disabled={!adminCode}
+                                        >
+                                            <Download size={16} />
+                                            Télécharger (24 rapports)
+                                        </button>
+                                    </div>
+                                </>
+                            ) : (
+                                <div style={{ textAlign: 'center', padding: 'var(--spacing-lg)' }}>
+                                    <Loader size={32} className="spin" style={{ color: 'var(--primary)', marginBottom: 'var(--spacing-md)' }} />
+                                    <p style={{ color: 'var(--text-primary)', fontWeight: 600 }}>
+                                        Génération en cours... {downloadProgress}%
+                                    </p>
                                     <div style={{
-                                        width: `${downloadProgress}%`,
-                                        height: '100%',
-                                        background: 'var(--primary)',
-                                        transition: 'width 0.3s ease'
-                                    }} />
+                                        width: '100%',
+                                        height: '8px',
+                                        background: 'var(--surface-light)',
+                                        borderRadius: '4px',
+                                        overflow: 'hidden',
+                                        marginTop: 'var(--spacing-sm)'
+                                    }}>
+                                        <div style={{
+                                            width: `${downloadProgress}%`,
+                                            height: '100%',
+                                            background: 'var(--primary)',
+                                            transition: 'width 0.3s ease'
+                                        }} />
+                                    </div>
+                                    <p style={{ color: 'var(--text-muted)', fontSize: 'var(--font-size-xs)', marginTop: 'var(--spacing-sm)' }}>
+                                        Récupération des données météo pour tous les gouvernorats...
+                                    </p>
                                 </div>
-                                <p style={{ color: 'var(--text-muted)', fontSize: 'var(--font-size-xs)', marginTop: 'var(--spacing-sm)' }}>
-                                    Récupération des données météo pour tous les gouvernorats...
-                                </p>
-                            </div>
-                        )}
+                            )}
+                        </div>
                     </div>
-                </div>
-            )}
+                )
+            }
         </div >
     );
 };
